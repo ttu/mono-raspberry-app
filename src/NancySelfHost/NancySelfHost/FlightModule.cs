@@ -1,4 +1,5 @@
-﻿using FlightDataHandler.Models;
+﻿using FlightDataHandler;
+using FlightDataHandler.Models;
 using Nancy;
 using Newtonsoft.Json;
 using System;
@@ -11,11 +12,11 @@ namespace NancySelfHost
 {
     public class FlightModule : NancyModule
     {
-        public FlightModule()
+        public FlightModule(IDataHandler dataHandler)
         {
             Get["/Flights", true] = async (parameters, ct) =>
             {
-                var flights = await Program.DataHandler.Value.RequestFlights();
+                var flights = await dataHandler.RequestFlights();
                 var json = JsonConvert.SerializeObject(flights.MapToDTO());
                 return json;
             };

@@ -10,9 +10,6 @@ namespace NancySelfHost
 
     internal class Program
     {
-        // TODO: Dependency Injection
-        public static Lazy<IDataHandler> DataHandler = new Lazy<IDataHandler>(() => new DataHandler());
-
         private static void Main(string[] args)
         {
             var uri = "http://localhost:8888";
