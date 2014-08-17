@@ -14,9 +14,9 @@ namespace NancySelfHost
         {
             Get["/"] = parameters => "Nancy is running ok.";
 
-            Get["/Hello"] = parameters => "Hello World!";
+            Get["/hello"] = parameters => "Hello World!";
 
-            Get["/OS"] = parameters => Environment.OSVersion.ToString();
+            Get["/os"] = parameters => Environment.OSVersion.ToString();
         }
     }
 }
