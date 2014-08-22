@@ -83,6 +83,11 @@ namespace FlightDataHandler
 
             _clients.Add(new ClientInfo { Id = clientId });
 
+            lock (_stopTimer)
+            {
+                _stopTimer.Stop();
+            }
+
             CheckDownloadTimer();
         }
 
@@ -182,8 +187,6 @@ namespace FlightDataHandler
 
             return retVal;
         }
-
-
 
         private void ClientUpdateAction()
         {
