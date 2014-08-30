@@ -11,9 +11,9 @@ namespace FlightDataHandler
 
         Task<List<FlightInfo>> RequestFlights();
 
-        void Subscribe(string p);
+        void Subscribe(string clientId);
 
-        void UnSubscribe(string p);
+        void UnSubscribe(string clientId);
 
         void SetClientLocation(string clientId, double latitude, double longitude, double elevation);
 

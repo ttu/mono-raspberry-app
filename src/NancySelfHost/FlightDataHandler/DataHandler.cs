@@ -43,7 +43,7 @@ namespace FlightDataHandler
             _stopTimer.Elapsed += _stopTimer_Elapsed;
 
             _downloadTimer.Interval = 10000;
-            _downloadTimer.Elapsed += _fetchTimer_Elapsed;
+            _downloadTimer.Elapsed += _downloadTimer_Elapsed;
 
             _updateSender = Task.Factory.StartNew(ClientUpdateAction);
 
@@ -56,7 +56,7 @@ namespace FlightDataHandler
         {
             var data = await GetFlightListWhenReady();
 
-            CheckStopTimerReset();
+            StartStopTimer();
 
             var flights = GetFlightsInsideDistance(data, latitude, longitude, MAX_DISTANCE_KM);
 
@@ -69,7 +69,7 @@ namespace FlightDataHandler
         {
             var data = await GetFlightListWhenReady();
 
-            CheckStopTimerReset();
+            StartStopTimer();
 
             return data.ToList();
         }
@@ -83,12 +83,9 @@ namespace FlightDataHandler
 
             _clients.Add(new ClientInfo { Id = clientId });
 
-            lock (_stopTimer)
-            {
-                _stopTimer.Stop();
-            }
+            StopStopTimer();
 
-            CheckDownloadTimer();
+            StartDownloadTimer();
         }
 
         public void UnSubscribe(string clientId)
@@ -100,7 +97,7 @@ namespace FlightDataHandler
 
             _clients.Remove(_clients.Single(c => c.Id == clientId));
 
-            CheckStopTimerReset();
+            StartStopTimer();
         }
 
         public void SetClientLocation(string clientId, double latitude, double longitude, double elevation)
@@ -115,14 +112,14 @@ namespace FlightDataHandler
         {
             while (_allFlights == null)
             {
-                CheckDownloadTimer();
+                StartDownloadTimer();
                 await Task.Delay(50);
             }
 
             return _allFlights;
         }
 
-        private void CheckDownloadTimer()
+        private void StartDownloadTimer()
         {
             lock (_downloadTimer)
             {
@@ -131,7 +128,7 @@ namespace FlightDataHandler
             }
         }
 
-        private void CheckStopTimerReset()
+        private void StartStopTimer()
         {
             if (_clients.Any())
                 return;
@@ -140,6 +137,14 @@ namespace FlightDataHandler
             {
                 _stopTimer.Stop();
                 _stopTimer.Start();
+            }
+        }
+
+        private void StopStopTimer()
+        {
+            lock (_stopTimer)
+            {
+                _stopTimer.Stop();
             }
         }
 
@@ -217,7 +222,7 @@ namespace FlightDataHandler
             }
         }
 
-        private async void _fetchTimer_Elapsed(object sender, ElapsedEventArgs e)
+        private async void _downloadTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             Debug.WriteLine("Download timer elapsed");
 

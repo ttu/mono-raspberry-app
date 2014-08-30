@@ -91,6 +91,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FlightDataHandlerService\FlightDataHandlerService.csproj">
+      <Project>{45890e5b-0c07-4aab-92ac-8d1a4c26df0c}</Project>
+      <Name>FlightDataHandlerService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FlightDataHandler\FlightDataHandler.csproj">
       <Project>{5d2fa582-1620-4e67-b76b-bec21305bcc7}</Project>
       <Name>FlightDataHandler</Name>

@@ -39,7 +39,7 @@ namespace NancySelfHost
         {
             var ctx = GlobalHost.ConnectionManager.GetHubContext("FlightsHub");
             var client = ctx.Clients.Client(e.Item1);
-            client.newData(e.Item2.MapToDTO());
+            client.newData(e.Item2 == null ? new List<FlightInfoDTO>() : e.Item2.MapToDTO());
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace FlightDataHandler.Models
+﻿using System;
+
+namespace FlightDataHandler.Models
 {
     public class FlightInfo
     {

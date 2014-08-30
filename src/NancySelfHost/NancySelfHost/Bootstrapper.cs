@@ -1,4 +1,5 @@
 ﻿using FlightDataHandler;
+using FlightDataHandlerService;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;
@@ -10,11 +11,12 @@ namespace NancySelfHost
     public class Bootstrapper : DefaultNancyBootstrapper
     {
         // TODO: Dependency Injection for SignalR
-        public static Lazy<IDataHandler> DataHandler = new Lazy<IDataHandler>(() => new DataHandler());
+        //public static Lazy<IDataHandler> DataHandler = new Lazy<IDataHandler>(() => new DataHandler());
+        public static Lazy<IDataHandler> DataHandler = new Lazy<IDataHandler>(() => new DataHandlerServiceObject());
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
-            container.Register<IDataHandler, DataHandler>(Bootstrapper.DataHandler.Value as DataHandler);
+            container.Register<IDataHandler>(Bootstrapper.DataHandler.Value);
 
             // This doesn't work for some reason (would need RouteTables.Routes.MapHubs or something...)
             //GlobalHost.DependencyResolver = new TinyIoCDependencyResolver(container);
