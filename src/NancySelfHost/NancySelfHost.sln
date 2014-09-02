@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightDataHandlerService", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{BB959ED9-9FDD-43E2-9751-AEB9F5D90C2C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaspberryIO", "RaspberryIO\RaspberryIO.csproj", "{FEE81CB1-4DF7-4782-9779-4BD727CE0FF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{BB959ED9-9FDD-43E2-9751-AEB9F5D90C2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB959ED9-9FDD-43E2-9751-AEB9F5D90C2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB959ED9-9FDD-43E2-9751-AEB9F5D90C2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEE81CB1-4DF7-4782-9779-4BD727CE0FF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEE81CB1-4DF7-4782-9779-4BD727CE0FF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEE81CB1-4DF7-4782-9779-4BD727CE0FF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEE81CB1-4DF7-4782-9779-4BD727CE0FF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
