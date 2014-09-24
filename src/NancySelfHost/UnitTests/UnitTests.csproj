@@ -6,8 +6,8 @@
     <ProjectGuid>{BB959ED9-9FDD-43E2-9751-AEB9F5D90C2C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DebugginHelper</RootNamespace>
-    <AssemblyName>DebugginHelper</AssemblyName>
+    <RootNamespace>DebuggingHelper</RootNamespace>
+    <AssemblyName>DebuggingHelper</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -59,11 +59,16 @@
   <ItemGroup>
     <Compile Include="ProtoBufTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RedisTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlightDataHandlerService\FlightDataHandlerService.csproj">
       <Project>{45890e5b-0c07-4aab-92ac-8d1a4c26df0c}</Project>
       <Name>FlightDataHandlerService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RedisDataStorage\RedisDataStorage.csproj">
+      <Project>{9e1e6c2b-6ab8-459e-81fc-dc2d04337048}</Project>
+      <Name>RedisDataStorage</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

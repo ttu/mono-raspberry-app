@@ -4,7 +4,7 @@ using ProtoBuf;
 using System;
 using System.Diagnostics;
 
-namespace DebugginHelper
+namespace DebuggingHelper
 {
     [TestClass]
     public class ProtoBufTests

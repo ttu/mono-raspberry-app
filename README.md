@@ -20,4 +20,4 @@ Control IO ports from Raspberry. Basically blink leds etc.
 
 #### Redis Datastorage
 
-TODO! Store JSON and serialize objects. 
+Store JSON and serialize objects. 
