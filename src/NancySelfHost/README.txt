@@ -23,3 +23,8 @@ FLUSHALL     - Removes data from ALL databases.
 
 StackEchange.Redis:
 https://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/Basics.md
+NuGet package doesn't work with Mono
+
+ServiceStack.Redis:
+https://github.com/ServiceStack/ServiceStack.Redis
+Works with Mono

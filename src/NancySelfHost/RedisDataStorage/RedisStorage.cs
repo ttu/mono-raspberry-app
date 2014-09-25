@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using StackExchange.Redis;
+using System.Net;
 
 namespace RedisDataStorage
 {
@@ -9,13 +10,19 @@ namespace RedisDataStorage
 
         public RedisStorage()
         {
-            redis = ConnectionMultiplexer.Connect("localhost");
+            redis = ConnectionMultiplexer.Connect("127.0.0.1");
         }
 
         public string Get(string key)
         {
             IDatabase db = redis.GetDatabase();
             return db.StringGet(key);
+        }
+
+        public bool Set(string key, string value)
+        {
+            IDatabase db = redis.GetDatabase();
+            return db.StringSet(key, value);
         }
 
         public bool Get<T>(string key, out T value)
@@ -43,6 +50,12 @@ namespace RedisDataStorage
             string json = JsonConvert.SerializeObject(value);
 
             db.StringSet(key, json);
+        }
+
+        public void Remove(string key)
+        {
+            IDatabase db = redis.GetDatabase();
+            db.KeyDelete(key);
         }
     }
 }

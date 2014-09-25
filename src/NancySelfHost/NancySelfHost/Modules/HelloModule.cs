@@ -1,10 +1,6 @@
 ﻿using Nancy;
+using RedisDataStorage;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace NancySelfHost
 {
@@ -17,6 +13,28 @@ namespace NancySelfHost
             Get["/hello"] = parameters => "Hello World!";
 
             Get["/os"] = parameters => Environment.OSVersion.ToString();
+
+            Get["/count"] = parameters =>
+            {
+                var st = new RedisStorageMono();
+                var c = st.Get("count");
+
+                if (c == null)
+                {
+                    c = "1";
+                    st.Set("count", c);
+                }
+                else
+                {
+                    var integer = System.Convert.ToInt32(c);
+                    integer++;
+
+                    c = integer.ToString();
+                    st.Set("count", c);
+                }
+
+                return c;
+            };
         }
     }
 }

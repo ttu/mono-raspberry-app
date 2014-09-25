@@ -53,6 +53,8 @@ namespace NancySelfHost
         private static void WaitForInput(string[] args, string url)
         {
             Console.WriteLine("Running on {0}", url);
+            Console.WriteLine("Is running on Mono {0}", MonoCheck.IsRunningOnMono());
+
             Console.WriteLine("Press any key to exit");
 
             // Under mono if you deamonize a process a Console.ReadLine will cause an EOF

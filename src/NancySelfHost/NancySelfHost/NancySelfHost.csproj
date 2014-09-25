@@ -83,6 +83,7 @@
     <Compile Include="Modules\FlightModule.cs" />
     <Compile Include="Modules\HelloModule.cs" />
     <Compile Include="Modules\IOModule.cs" />
+    <Compile Include="MonoCheck.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -104,6 +105,10 @@
     <ProjectReference Include="..\RaspberryIO\RaspberryIO.csproj">
       <Project>{fee81cb1-4df7-4782-9779-4bd727ce0ff9}</Project>
       <Name>RaspberryIO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RedisDataStorage\RedisDataStorage.csproj">
+      <Project>{9e1e6c2b-6ab8-459e-81fc-dc2d04337048}</Project>
+      <Name>RedisDataStorage</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

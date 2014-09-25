@@ -17,12 +17,12 @@ namespace NancySelfHost
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
-            Console.WriteLine("Application Startup");
-
             container.Register<IDataHandler>(Bootstrapper.DataHandler.Value);
+
             try
             {
-                container.Register<Raspberry>(new Raspberry());
+                // If this is not exceuted on RaspberryPI this will throw exception
+                //container.Register<Raspberry>(new Raspberry());
             }
             catch (Exception e)
             {
@@ -36,8 +36,6 @@ namespace NancySelfHost
             //GlobalHost.DependencyResolver.Register(typeof(IDataHandler),() => dh);
 
             base.ApplicationStartup(container, pipelines);
-
-            Console.WriteLine("Application Startup ready");
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)
