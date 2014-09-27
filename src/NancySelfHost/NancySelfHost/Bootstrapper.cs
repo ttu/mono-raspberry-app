@@ -40,6 +40,7 @@ namespace NancySelfHost
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)
         {
+            nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("App", @"App"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("Scripts", @"Scripts"));
             base.ConfigureConventions(nancyConventions);
         }
