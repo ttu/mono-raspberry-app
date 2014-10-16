@@ -19,14 +19,14 @@ namespace NancySelfHost
         {
             container.Register<IDataHandler>(Bootstrapper.DataHandler.Value);
 
-            try
+            if (MonoCheck.IsRunningOnMono())
             {
-                // If this is not exceuted on RaspberryPI this will throw exception
-                //container.Register<Raspberry>(new Raspberry());
+                // If this is not executed on RaspberryPI this will throw exception
+                container.Register<IRaspberry>(new Raspberry());
             }
-            catch (Exception e)
+            else
             {
-                Console.WriteLine(e.Message);
+                container.Register<IRaspberry>(new DummyRaspberry());
             }
 
             // This doesn't work for some reason (would need RouteTables.Routes.MapHubs or something...)

@@ -32,3 +32,10 @@ Works with Mono
 ## ANGULAR JS APP
 
 http://localhost:8080/App/index.html
+
+Style guides:
+https://github.com/toddmotto/angularjs-styleguide
+https://github.com/johnpapa/angularjs-styleguide
+
+Top mistakes:
+http://www.airpair.com/angularjs/posts/top-10-mistakes-angularjs-developers-make

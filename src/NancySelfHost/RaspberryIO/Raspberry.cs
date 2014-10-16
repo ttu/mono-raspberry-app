@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace RaspberryIO
 {
@@ -12,7 +13,60 @@ namespace RaspberryIO
         Moving
     }
 
-    public class Raspberry : IDisposable
+    public interface IRaspberry
+    {
+        event EventHandler<int> ActiveLedChanged;
+        event EventHandler<double> TemperatureChanged;
+
+        int ActiveLedIndex { get; set; }
+
+        double Temperature { get; set; }
+    }
+
+    public class DummyRaspberry : IRaspberry
+    {
+        private Timer _timer;
+
+        public DummyRaspberry()
+        {
+            _timer = new Timer(2000);
+            _timer.Elapsed += _timer_Elapsed;
+            _timer.Start();
+
+            Temperature = 21;
+        }
+
+        public event EventHandler<int> ActiveLedChanged;
+
+        public event EventHandler<double> TemperatureChanged;
+
+        public int ActiveLedIndex { get; set; }
+
+        public double Temperature { get; set; }
+
+        private void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            var rand = new Random((int)DateTime.Now.Ticks);
+
+            var value = (double)rand.Next(0, 100);
+
+            if (value % 2 == 0)
+            {
+                Temperature += value / 100;
+            }
+            else
+            {
+                Temperature -= value / 100;
+            }
+
+            Temperature = Math.Round(Temperature, 2);
+
+            if (TemperatureChanged != null)
+                TemperatureChanged(this, Temperature);
+        }
+    }
+
+    public class Raspberry : IRaspberry, IDisposable
     {
         private volatile int _speed;
         private LedMode _mode;
@@ -53,9 +107,13 @@ namespace RaspberryIO
             Dispose(false);
         }
 
+        public event EventHandler<double> TemperatureChanged;
+
         public event EventHandler<int> ActiveLedChanged;
 
         public int ActiveLedIndex { get; set; }
+
+        public double Temperature { get; set; }
 
         public LedMode Mode
         {

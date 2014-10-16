@@ -4,15 +4,17 @@ using RaspberryIO;
 
 namespace NancySelfHost.Modules
 {
-    class IOModule : NancyModule
+    public class IOModule : NancyModule
     {
-        public IOModule(Raspberry raspberry)
+        public IOModule(IRaspberry raspberry)
         {
+            Get["/r/temperature"] = parameters => raspberry.Temperature.ToString();
+
             Get["/r/speed/{speed:int}"] = parameters =>
             {
                 var speed = parameters["speed"];
 
-                raspberry.SetSpeed(speed);
+                //raspberry.SetSpeed(speed);
 
                 return speed;
             };
@@ -22,7 +24,7 @@ namespace NancySelfHost.Modules
                 var ledIndex = parameters["ledIndex"];
 
                 raspberry.ActiveLedIndex = ledIndex;
-                raspberry.Mode = LedMode.Single;
+                //raspberry.Mode = LedMode.Single;
 
                 return true;
             };
@@ -31,13 +33,20 @@ namespace NancySelfHost.Modules
             {
                 var speed = parameters["speed"];
 
-                raspberry.SetSpeed(speed);
-                raspberry.Mode = LedMode.Moving;
+                //raspberry.SetSpeed(speed);
+                //raspberry.Mode = LedMode.Moving;
 
                 return true;
             };
 
             raspberry.ActiveLedChanged += raspberry_ActiveLedChanged;
+            raspberry.TemperatureChanged += raspberry_TemperatureChanged;
+        }
+
+        void raspberry_TemperatureChanged(object sender, double e)
+        {
+            var ctx = GlobalHost.ConnectionManager.GetHubContext("IOHub");
+            ctx.Clients.All.temperatureChanged(e);
         }
 
         private void raspberry_ActiveLedChanged(object sender, int e)
